@@ -1,7 +1,7 @@
 dependencies: []
 galaxy_info:
   author: Boris Mikhaylov
-  description: Installs docker using official ubuntu installation script
+  description: Installs and configures docker
   platforms:
     - ubuntu
 

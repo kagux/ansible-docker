@@ -1,13 +1,13 @@
-- name: install docker using docker shell script
-  shell: curl -sSL https://get.docker.io/ubuntu/ | sudo sh
-  args:
-    creates: /usr/bin/docker
-  register: docker_installed
+- include_vars: btrfs.yml
+  when: docker_use_btrfs_partition
+- include_vars: devicemapper.yml
+  when: not docker_use_btrfs_partition
 
-- name: Install Specific Version
-  apt: pkg=lxc-docker-{{docker_version}} state=present
-  when: docker_version is defined
+- include: install.yml
 
-- name: Update facts
-  setup: ''
-  when: docker_installed.changed 
+- include: daemon_config.yml
+
+- include: mount_partition.yml
+  when: docker_use_btrfs_partition
+
+- include: cleanup.yml

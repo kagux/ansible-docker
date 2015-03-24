@@ -1,0 +1,24 @@
+- name: check if /var/lib/docker is mounted btrfs already
+  shell: mount |grep "{{docker_data_path}} type btrfs"
+  ignore_errors: True
+  register: docker_btrfs
+  changed_when: docker_btrfs.rc > 0
+
+- name: install btrfs
+  apt: pkg=btrfs-tools state=installed
+  when: docker_btrfs.changed
+
+- name: configure partition with btrfs
+  shell: "mkfs.btrfs {{ docker_data_partition }}"
+  when: docker_btrfs.changed
+  ignore_errors: yes
+
+- name: ensure docker data path is mounted
+  mount: name={{ docker_data_path }} fstype=btrfs src={{docker_data_partition}} state=mounted
+  register: docker_partition_mount
+
+- name: restart docker
+  service: name=docker state=restarted
+  when: docker_partition_mount.changed
+
+

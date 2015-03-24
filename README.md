@@ -1,1 +1,1 @@
-Installs docker using official Ubuntu installation script
+Installs and configures docker
