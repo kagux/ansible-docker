@@ -2,7 +2,7 @@
   lineinfile:
     dest: /etc/default/docker
     create: yes 
-    line: 'DOCKER_OPTS="-s {{docker_backend_driver}} --dns {{ansible_docker0.ipv4.address}} --dns 8.8.8.8 --dns-search service.consul"'
+    line: 'DOCKER_OPTS="-s {{docker_backend_driver}}"'
   register: docker_daemon_config
 
 - name: restart docker
