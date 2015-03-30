@@ -10,4 +10,4 @@
 
 - name: Update facts
   setup: ''
-  when: docker_installed.changed 
+  when: docker_installed.changed or ansible_docker0 is not defined
