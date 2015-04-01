@@ -1,5 +1,7 @@
 - name: remove exited containers
   shell: docker ps -a | grep -i exited | grep -v _data | awk '{ print $1 }' | xargs -r docker rm -f
+  ignore_errors: yes
 
 - name: remove dangling images
   shell: docker images -q --filter 'dangling=true' | xargs -r docker rmi -f
+  ignore_errors: yes
