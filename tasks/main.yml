@@ -5,6 +5,8 @@
 
 - include: install.yml
 
+- include: users.yml
+
 - include: daemon_config.yml
 
 - include: mount_partition.yml

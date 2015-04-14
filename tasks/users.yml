@@ -1,0 +1,7 @@
+- name: grant docker access to users
+  user: >
+    name={{item}}
+    append=yes
+    groups=docker
+    state=present
+  with_items: docker_users 

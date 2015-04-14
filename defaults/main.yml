@@ -1,3 +1,4 @@
 docker_use_btrfs_partition: no
 docker_data_partition: /dev/sdb
 docker_data_path: /var/lib/docker
+docker_users: []
