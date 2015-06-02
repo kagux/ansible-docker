@@ -7,7 +7,13 @@
 - name: Install Specific Version
   apt: pkg=lxc-docker-{{docker_version}} state=present
   when: docker_version is defined
+  register: docker_installed
 
 - name: Update facts
   setup: ''
   when: docker_installed.changed or ansible_docker0 is not defined
+
+# docker is managed by the upstart but still has init.d script
+# which confuses ansible and results in playbook error
+- name: remove docker init.d script
+  file: path=/etc/init.d/docker state=absent
