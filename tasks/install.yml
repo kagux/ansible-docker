@@ -1,12 +1,8 @@
 - name: install docker using docker shell script
-  shell: curl -sSL https://get.docker.io/ubuntu/ | sudo sh
+  shell: curl -sSL https://get.docker.io | sh
   args:
     creates: /usr/bin/docker
   register: docker_installed
-
-- name: Install Specific Version
-  apt: pkg=lxc-docker-{{docker_version}} state=present
-  when: docker_version is defined
 
 - name: Update facts
   setup: ''
