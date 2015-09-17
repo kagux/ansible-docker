@@ -1,5 +1,5 @@
 - name: install docker using docker shell script
-  shell: curl -sSL https://get.docker.io | sh
+  shell: curl -sSL https://get.docker.com/ | sh
   args:
     creates: /usr/bin/docker
   register: docker_installed
